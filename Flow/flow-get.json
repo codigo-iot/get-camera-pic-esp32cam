@@ -1,5 +1,69 @@
 [
     {
+        "id": "136db29.de26fcd",
+        "type": "tab",
+        "label": "Flow 8",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "c5e06f11.311988",
+        "type": "http request",
+        "z": "136db29.de26fcd",
+        "name": "",
+        "method": "GET",
+        "ret": "bin",
+        "paytoqs": "ignore",
+        "url": "http://192.168.15.26/capture",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "authType": "",
+        "x": 390,
+        "y": 120,
+        "wires": [
+            [
+                "cb3970ee.6aab58"
+            ]
+        ]
+    },
+    {
+        "id": "87c2d400.5aa7f",
+        "type": "ui_template",
+        "z": "136db29.de26fcd",
+        "group": "eef7e693.5d679",
+        "name": "",
+        "order": 1,
+        "width": 7,
+        "height": 5,
+        "format": "<iframe width=\"320\" height=\"240\"\n    src=\"http://192.168.15.26:81/stream\">\n</iframe>",
+        "storeOutMessages": true,
+        "fwdInMessages": true,
+        "resendOnRefresh": true,
+        "templateScope": "local",
+        "x": 600,
+        "y": 240,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "a287abb6.f5adf8",
+        "type": "file",
+        "z": "136db29.de26fcd",
+        "name": "",
+        "filename": "",
+        "appendNewline": false,
+        "createDir": false,
+        "overwriteFile": "true",
+        "encoding": "setbymsg",
+        "x": 830,
+        "y": 120,
+        "wires": [
+            []
+        ]
+    },
+    {
         "id": "34a9990d.0e60b6",
         "type": "inject",
         "z": "136db29.de26fcd",
@@ -28,5 +92,59 @@
                 "5841fc57.302b6c"
             ]
         ]
+    },
+    {
+        "id": "cb3970ee.6aab58",
+        "type": "function",
+        "z": "136db29.de26fcd",
+        "name": "",
+        "func": "msg.filename = \"/home/hugo/pics/\"+global.get (\"fecha\")+\".jpg\";\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 610,
+        "y": 120,
+        "wires": [
+            [
+                "a287abb6.f5adf8"
+            ]
+        ]
+    },
+    {
+        "id": "5841fc57.302b6c",
+        "type": "function",
+        "z": "136db29.de26fcd",
+        "name": "",
+        "func": "global.set (\"fecha\", msg.payload);\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 380,
+        "y": 180,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "eef7e693.5d679",
+        "type": "ui_group",
+        "name": "Capture",
+        "tab": "1d333464.25eb9c",
+        "order": 1,
+        "disp": true,
+        "width": 7,
+        "collapse": false
+    },
+    {
+        "id": "1d333464.25eb9c",
+        "type": "ui_tab",
+        "name": "ESP32CAM",
+        "icon": "dashboard",
+        "disabled": false,
+        "hidden": false
     }
 ]
